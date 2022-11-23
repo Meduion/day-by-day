@@ -14,6 +14,10 @@ var btn = document.getElementById('.btn');
 
 
 
+var timeBlocks = document.querySelectorAll('.time-block');
+
+var today = dayjs();
+
 $(function () {
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
@@ -29,6 +33,18 @@ $(function () {
   // attribute of each time-block be used to conditionally add or remove the
   // past, present, and future classes? How can Day.js be used to get the
   // current hour in 24-hour time?
+  function blockClass() {
+    for (var i = 0; i < timeBlocks.length; i++) {
+      if (timeBlocks[i] == today) {
+       $(timeBlocks[i]).addClass("present");
+      } else if (timeBlocks[i] < today) {
+        $(timeBlocks[i]).addClass("past");
+      } else {
+        $(timeBlocks[i]).addClass("future");
+      }
+    };
+  }
+  blockClass();
   
   
 
@@ -38,8 +54,8 @@ $(function () {
   
 
   // TODO: Add code to display the current date in the header of the page.
-  var today = dayjs();
+  
   
   // Jquery call to the currentDay ID to display the dayjs var function in specified format
-  $('#currentDay').text(today.format('MMMM D, YYYY h:mm A'));
+  $('#currentDay').text(today.format('MMMM D, YYYY HH:mm A'));
 });
