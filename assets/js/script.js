@@ -1,19 +1,16 @@
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
-var nineAM = document.getElementById('#hour-9');
-var tenAM = document.getElementById('#hour-10');
-var elevenAM = document.getElementById('#hour-11');
-var twelvePM = document.getElementById('#hour-12');
-var onePM = document.getElementById('#hour-01');
-var twoPM = document.getElementById('#hour-02');
-var threePM = document.getElementById('#hour-03');
-var fourPM = document.getElementById('#hour-04');
-var fivePM = document.getElementById('#hour-05');
+var nineAM = document.getElementById('#09');
+var tenAM = document.getElementById('#10');
+var elevenAM = document.getElementById('#11');
+var twelvePM = document.getElementById('#12');
+var onePM = document.getElementById('#13');
+var twoPM = document.getElementById('#14');
+var threePM = document.getElementById('#15');
+var fourPM = document.getElementById('#16');
+var fivePM = document.getElementById('#17');
 var btn = document.getElementById('.btn');
-
-
-
 var timeBlocks = document.querySelectorAll('.time-block');
 
 var today = dayjs();
@@ -28,16 +25,12 @@ $(function () {
 
   
 
-  // TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time?
+  // This function applies the classes of present, past, and future to the timeBlocks variable if it's id attribute aligns with the daysjs 24 hour time format. Using Jquery and the .attr('id') method was found at https://stackoverflow.com/questions/19304343/using-the-id-for-if-condition the top rated answer posted by Mike H.
   function blockClass() {
     for (var i = 0; i < timeBlocks.length; i++) {
-      if (timeBlocks[i] == today) {
+      if ($(timeBlocks[i]).attr('id') == today.format('HH')) {
        $(timeBlocks[i]).addClass("present");
-      } else if (timeBlocks[i] < today) {
+      } else if ($(timeBlocks[i]).attr('id') < today.format('HH')) {
         $(timeBlocks[i]).addClass("past");
       } else {
         $(timeBlocks[i]).addClass("future");
