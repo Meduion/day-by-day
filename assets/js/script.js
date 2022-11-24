@@ -24,6 +24,7 @@ $(function () {
   // time-block containing the button that was clicked? How might the id be
   // useful when saving the description in local storage?
 
+  // Supposed to be the function that will re-display tasks in their sections on reload. It is console logging correctly, just not sure how to get them to display in the right place.
   function displayTasks() {
     for (var i = 0; i < tasks.length; i++) {
       task = tasks[i];
@@ -32,6 +33,7 @@ $(function () {
     }
   }
   
+  // Function that grabs the previously entered tasks from local storage on reload and makes them available to the tasks variable again.
   function loadTasks() {
     var storedTasks = JSON.parse(localStorage.getItem('tasks'));
     if (storedTasks !== null) {
@@ -40,10 +42,12 @@ $(function () {
     displayTasks();
   }
 
+  // Takes the tasks variable and stores it in local storage with JSON
   function storeTasks() {
   localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
+// Adds click funtionality to all buttons. Button input is drawn through DOM by accessing the button's previousElementSibling which is the text area, and grabs the value from that. The function is supposed to end if the textarea is empty and the button is clicked but it's currently still logging an empty string. It then calls the storeTasks function to get the input into local storage. The displayTasks function is supposed to be what will re-enter the tasks upon reload, unfinished.
   $(btn).click(function(event) {
   event.preventDefault();
   var tasksInput = this.previousElementSibling.value;
@@ -72,12 +76,6 @@ $(function () {
   }
   blockClass();
   loadTasks();
-  
-  
-
-  // TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do this?
   
   // Jquery call to the currentDay ID to display the dayjs var function in specified format
   $('#currentDay').text(today.format('MMMM D, YYYY HH:mm A'));
